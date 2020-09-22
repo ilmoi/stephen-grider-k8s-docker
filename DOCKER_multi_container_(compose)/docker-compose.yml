@@ -1,0 +1,11 @@
+version: '3'
+# services = containers
+# by just defining the containers together in a single yaml they will be networked to each other
+services:
+    redis-server:
+        image: 'redis'
+    node-app:
+        restart: always #set the restarts policy
+        build: . #look in the current dir for a dockerfile and use that to build an image
+        ports:
+            - '4445:8081' #first number is port on our machine, second inside the container

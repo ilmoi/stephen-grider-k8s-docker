@@ -1,0 +1,13 @@
+apiVersion: v1 #Kubernetes has different APIs for different objects
+kind: Pod #we're creating a pod - the smallest unit of work in k8s
+metadata:
+  name: client-pod #pod name, nothing too interesting
+  labels:
+    component: web #this allows us to tie together the two yaml files
+    # NOTE that both "component" and "web" are arbitrary choices - could have called them anything
+spec:
+  containers: #all the containers we want inside - in our case just 1
+    - name: client #name of the container
+      image: stephengrider/multi-worker #public image of the container
+      ports:
+        - containerPort: 3000 #routing to the container, on which port

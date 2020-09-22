@@ -1,0 +1,13 @@
+apiVersion: v1 #k8s api specifies what kind of objects we get access to
+kind: Service #we're creating a service type object
+metadata:
+  name: client-node-port #just name
+spec:
+  type: NodePort #in particular, we're create a service type object of NodePort type
+  ports:
+    - port: 3050 #other objects inside of the cluster can reach out here
+      targetPort: 3000 #send any incoming traffic from selector container
+      nodePort: 31515 #port that we can access inside the browser. always between 30_000 - 32_767
+  selector:
+    component: web #this allows us to tie together the two yaml files
+    # NOTE that both "component" and "web" are arbitrary choices - could have called them anything
